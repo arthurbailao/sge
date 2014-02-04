@@ -1,0 +1,175 @@
+<div class="ui form segment">
+  <%= form_for @patient, url: {action: "create"} do |form| %>
+    <h3 class="ui left floated header">Dados pessoais</h3>
+    <div class="ui clearing divider"></div>
+    <%= fields_for @patient.person do |person_form| %>
+      <div class="ui two column grid">
+        <div class="column">
+          <div class="field">
+            <%= person_form.label :name, "Nome completo" %>
+            <div class="ui left labeled icon input">
+              <%= person_form.text_field :name, placeholder:"nome sobrenome" %> 
+              <i class="user icon"></i>
+              <div class="ui corner label"><i class="icon asterisk"></i></div>
+            </div>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <%= person_form.label :birth, "Nascimento" %>
+              <div class="ui left labeled icon input">
+                <%= person_form.text_field :birth, placeholder:"dd/mm/aaaa" %>
+                <i class="date basic icon"></i>
+                <div class="ui corner label"><i class="icon asterisk"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+            <%= person_form.label :gender, "Sexo" %>
+            <div class="ui selection dropdown">
+              <%= person_form.hidden_field :gender %>
+              <div class="default text">sexo</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item" data-value="male">Masculino</div>
+                <div class="item" data-value="female">Feminino</div>
+              </div>
+            </div>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <%= person_form.label :cpf, "CPF" %>
+              <%= person_form.text_field :cpf, placeholder:"cpf" %>
+            </div>
+            <div class="field">
+              <%= person_form.label :rg, "RG" %>
+              <%= person_form.text_field :rg, placeholder:"rg" %>
+            </div>
+          </div>          
+        </div>
+        <div class="column">
+          
+        </div>
+      </div>
+    <% end %>
+    <h3 class="ui left floated header">Contato</h3>
+    <div class="ui clearing divider"></div>
+
+    <h3 class="ui left floated header">Endereço</h3>
+    <div class="ui clearing divider"></div>
+    <%= fields_for @patient.person.address do |person_addr| %>
+      <div class="ui two column grid">
+        <div class="column">
+          <div class="field">
+            <%= person_addr.label :street, "Logradouro" %>
+            <%= person_addr.text_field :street, placeholder:"rua/avenida" %>
+          </div>
+          <div class="two fields">
+            <div class="field">
+              <%= person_addr.label :number, "Número" %>
+              <%= person_addr.text_field :number, placeholder:"número" %>
+            </div>
+            <div class="field">
+              <%= person_addr.label :complement, "Complemento" %>
+              <%= person_addr.text_field :complement, placeholder:"complemento" %>
+            </div>
+          </div>
+          <div class="field">
+            <%= person_addr.label :district, "Bairro" %>
+            <%= person_addr.text_field :district, placeholder:"bairro" %>
+          </div>
+          <div class="field">
+            <%= person_addr.label :city, "Cidade" %>
+            <%= person_addr.text_field :city, placeholder:"cidade" %>
+          </div>
+          <div class="field">
+            <%= person_addr.label :state, "Estado" %>
+            <div class="ui selection dropdown state">
+              <%= person_addr.hidden_field :state %>
+              <div class="default text">estado</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <% states.each do |state| %>
+                  <div class="item" data-value="<%= state.last %>"><%= state.first %></div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <div class="two fields">
+            <div class="field zip">
+              <%= person_addr.label :zip, "CEP" %>
+              <%= person_addr.text_field :zip, placeholder:"cep" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    <%= form.submit "Salvar", class: "ui blue submit button" %>
+  <% end %>
+</div>
+
+<%= javascript_tag do %>
+  var zipcode = '';
+  $('.ui.form').form({
+    personName: {
+      identifier: 'person[name]',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Por favor entre com o nome completo'
+        }
+      ]
+    },
+    personBirth: {
+      identifier: 'person[birth]',
+      rules: [
+        {
+          type:   'empty',
+          prompt: 'Por favor entre com uma data'
+        },
+        {
+          type:   'date',
+          prompt: 'Por favor entre com uma data válida'
+        }
+      ]
+    },
+    personGender: {
+      identifier: 'person[gender]',
+      rules: [
+        {
+          type: 'empty',
+          prompt: 'Por favor escolha um sexo'
+        }
+      ]
+    },
+    addressZip: {
+      identifier: 'address[zip]',
+      rules: [
+        {
+          type:   'smartInteger',
+          prompt: 'Por favor entre somente com números'
+        },
+        {
+          type:   'smartLength[8]',
+          prompt: 'Por favor entre com apenas oito números'
+        }
+      ]
+    }
+  }, {
+    inline: 'true',
+    on:     'blur',
+    onValid: function() {
+      var current = $('.ui.form').form('get field', 'address[zip]').val();
+      if(current && $.fn.form.settings.rules.smartInteger(current) && $.fn.form.settings.rules.smartLength(current, 8) && zipcode != current) {
+        zipcode = current;
+        $('.ui.form').addClass('loading');
+        $.get("http://cep.republicavirtual.com.br/web_cep.php", {formato: 'json',cep: zipcode}, function(res){
+          fillAddress(res);
+        }).always(function(){
+          $('.ui.form').removeClass('loading');
+        });
+      }
+    }
+  });
+
+  $('.ui.selection.dropdown').dropdown();
+<% end %>

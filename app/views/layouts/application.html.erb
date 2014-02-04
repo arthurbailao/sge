@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>SGE</title>
+
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+  <div class="ui tiered menu">
+    <div class="menu">
+      <a class="active item">
+        <i class="users icon"></i>
+        Pacientes
+      </a>
+      <a class="item">
+        <i class="medkit icon"></i>
+        Planos de saúde
+      </a>
+      <a class="item">
+        <i class="doctor icon"></i>
+        Tratamentos
+      </a>
+    </div>
+    <div class="ui sub menu">
+      <a class="active item">Listar</a>
+      <a class="item">Adicionar</a>
+    </div>
+  </div>
+
+    <%= yield %>
+ 
+  </body>
+</html>
