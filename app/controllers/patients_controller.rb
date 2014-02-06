@@ -7,6 +7,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new
     @patient.build_person
     @patient.person.build_address
+    @patient.person.build_contact
   end
 
   def create
@@ -22,7 +23,8 @@ class PatientsController < ApplicationController
   def post_params
     params.require(:patient).permit(
       person_attributes: [:name, :birth, :gender, :cpf, :rg,
-        address_attributes: [:street, :number, :complement, :district, :city, :state, :zip]
+        address_attributes: [:street, :number, :complement, :district, :city, :state, :zip],
+        contact_attributes: [:email, :mobile, :landline, :business]
     ])
   end
 
