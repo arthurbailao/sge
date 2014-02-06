@@ -3,4 +3,6 @@ class Person < ActiveRecord::Base
   belongs_to :patient
 
   validates :name, :birth, presence: true
+
+  accepts_nested_attributes_for :address
 end

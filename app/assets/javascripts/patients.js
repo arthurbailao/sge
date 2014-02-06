@@ -15,24 +15,24 @@ $.fn.form.settings.rules.smartLength = function(value, required) {
 }
 
 function clearAddress() {
-  $('#address_city').val('');
-  $('#address_district').val('');
-  $('#address_street').val('');
+  $('#patient_person_attributes_address_attributes_city').val('');
+  $('#patient_person_attributes_address_attributes_district').val('');
+  $('#patient_person_attributes_address_attributes_street').val('');
   $('.state').dropdown('restore defaults');
 }
 
 function fillAddress(param) {
   switch(param.resultado){
     case '1':
-      $('#address_city').val(param.cidade);
-      $('#address_district').val(param.bairro);
-      $('#address_street').val(param.tipo_logradouro + ' ' + param.logradouro);
+      $('#patient_person_attributes_address_attributes_city').val(param.cidade);
+      $('#patient_person_attributes_address_attributes_district').val(param.bairro);
+      $('#patient_person_attributes_address_attributes_street').val(param.tipo_logradouro + ' ' + param.logradouro);
       $('.state').dropdown('set selected', param.uf);
       break;
     case '2':
-      $('#address_city').val(param.cidade);
-      $('#address_district').val('');
-      $('#address_street').val('');
+      $('#patient_person_attributes_address_attributes_city').val(param.cidade);
+      $('#patient_person_attributes_address_attributes_district').val('');
+      $('#patient_person_attributes_address_attributes_street').val('');
       $('.state').dropdown('set selected', param.uf);
       break;
     default:

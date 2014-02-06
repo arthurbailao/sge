@@ -1,0 +1,10 @@
+<% content_for :submenu do %>
+  <div class="ui sub menu">
+    <%= link_to "Listar", patients_path, class: "item active" %>
+    <%= link_to "Adicionar", new_patient_path, class: "item" %>
+  </div>
+<% end %>
+
+<% @patients.each do |patient| %>
+  <p><%= patient.person.name %></p>
+<% end %>

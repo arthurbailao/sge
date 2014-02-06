@@ -12,25 +12,16 @@
   </head>
 
   <body>
-  <div class="ui tiered menu">
+  <div class="ui menu <%= "tiered" if ["patients"].include?(params[:controller]) %>">
     <div class="menu">
-      <a class="active item">
-        <i class="users icon"></i>
-        Pacientes
-      </a>
+      <%= link_to raw("<i class=\"home icon\"></i>Início"), root_path, class: "item#{params[:controller] == "home" ? " active" : nil }" %>
+      <%= link_to raw("<i class=\"users icon\"></i>Pacientes"), patients_path, class: "item#{params[:controller] == "patients" ? " active" : nil }" %>
       <a class="item">
         <i class="medkit icon"></i>
         Planos de saúde
       </a>
-      <a class="item">
-        <i class="doctor icon"></i>
-        Tratamentos
-      </a>
     </div>
-    <div class="ui sub menu">
-      <a class="active item">Listar</a>
-      <a class="item">Adicionar</a>
-    </div>
+    <%= yield :submenu %>
   </div>
 
     <%= yield %>
