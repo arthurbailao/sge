@@ -29,6 +29,7 @@ GEM
     atomic (1.1.14)
     autoprefixer-rails (1.0.20140130)
       execjs
+    browser (0.3.2)
     builder (3.1.4)
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -137,6 +138,7 @@ PLATFORMS
 
 DEPENDENCIES
   autoprefixer-rails
+  browser
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails

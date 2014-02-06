@@ -9,6 +9,7 @@
   <%= form_for @patient, url: {action: "create"} do |form| %>
     <h3 class="ui left floated header">Dados pessoais</h3>
     <div class="ui clearing divider"></div>
+    <%= render 'shared/error_messages', object: form.object %>
     <%= form.fields_for :person do |person_form| %>
       <div class="ui two column grid">
         <div class="column">
@@ -43,11 +44,11 @@
             </div>
           </div>
           <div class="two fields">
-            <div class="field">
+            <div class="field cpf">
               <%= person_form.label :cpf, "CPF" %>
               <%= person_form.text_field :cpf, placeholder:"cpf" %>
             </div>
-            <div class="field">
+            <div class="field rg">
               <%= person_form.label :rg, "RG" %>
               <%= person_form.text_field :rg, placeholder:"rg" %>
             </div>
@@ -111,6 +112,15 @@
       <% end %>
     <% end %>
     <%= form.submit "Salvar", class: "ui blue submit button" %>
+
+    <%= javascript_tag do %>
+      <% if form.object.errors[:"person.cpf"].any? %>
+        $('.field.cpf').addClass('error');
+      <% end %>
+      <% if form.object.errors[:"person.rg"].any? %>
+        $('.field.rg').addClass('error');
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 
@@ -163,7 +173,13 @@
     }
   }, {
     inline: 'true',
-    on: 'submit'
+    on: 'submit',
+    onFailure: function(){
+      $('<%= browser.chrome? ? "body" : "html" %>').animate({
+        scrollTop: $('.field.error:first').offset().top - 21
+      });
+      return false;
+    }
   });
 
   $('#patient_person_attributes_address_attributes_zip').blur(function(obj){

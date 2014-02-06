@@ -1,0 +1,20 @@
+<% if object.errors.any? %>
+  <div class="ui error message" >
+    <i class="close icon"></i>
+    <div class="header">
+      O formulário contém <%= pluralize(object.errors.count, "erro") %>
+    </div>
+    <ul class="list">
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= javascript_tag do %>
+    $('.ui.form').addClass('error');
+    $('.message .close').on('click', function() {
+      $(this).closest('.message').fadeOut();
+    });
+  <% end %>
+<% end %>
