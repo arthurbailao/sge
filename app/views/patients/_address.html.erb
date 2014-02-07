@@ -12,13 +12,19 @@
     <%= address.text_field :complement, placeholder:"complemento" %>
   </div>
 </div>
-<div class="field district">
-  <%= address.label :district, "Bairro" %>
-  <%= address.text_field :district, placeholder:"bairro" %>
+<div class="two fields">
+  <div class="field district">
+    <%= address.label :district, "Bairro" %>
+    <%= address.text_field :district, placeholder:"bairro" %>
+  </div>
+  <div class="field"></div>
 </div>
-<div class="field city">
-  <%= address.label :city, "Cidade" %>
-  <%= address.text_field :city, placeholder:"cidade" %>
+<div class="two fields">
+  <div class="field city">
+    <%= address.label :city, "Cidade" %>
+    <%= address.text_field :city, placeholder:"cidade" %>
+  </div>
+  <div class="field"></div>
 </div>
 <div class="field state">
   <%= address.label :state, "Estado" %>
@@ -33,7 +39,10 @@
     </div>
   </div>
 </div>
-<div class="field zip">
-  <%= address.label :zip, "CEP" %>
-  <%= address.text_field :zip, placeholder:"cep" %>
+<div class="two fields">
+  <div class="field zip">
+    <%= address.label :zip, "CEP" %>
+    <%= address.text_field :zip, placeholder:"cep" %>
+  </div>
+  <div class="field"></div>
 </div>

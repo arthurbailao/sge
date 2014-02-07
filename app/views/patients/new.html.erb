@@ -1,15 +1,20 @@
 <% content_for :submenu do %>
-  <div class="ui sub menu">
+  <div class="ui sub pointing menu">
     <%= link_to "Listar", patients_path, class: "item" %>
     <%= link_to "Adicionar", new_patient_path, class: "item active" %>
   </div>
 <% end %>
 
-<div class="ui form segment">
-  <%= form_for @patient, url: {action: "create"} do |patient| %>
-    <%= render 'patient', patient: patient %>
-  <% end %>
+<div class="ui one column page grid">
+  <div class="column">
+    <div class="ui form segment">
+      <%= form_for @patient, url: {action: "create"} do |patient| %>
+        <%= render 'patient', patient: patient %>
+      <% end %>
+    </div>
+  </div>
 </div>
+
 
 <%= javascript_tag do %>
   var zipcode = '';

@@ -1,17 +1,3 @@
 // Place all the styles related to the Patients controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.content {
-  margin: 0 25px 0 25px;
-}
-
-.field.name, .field.email, .field.street {
-  max-width: 800px;
-}
-
-.field.birth, .field.cpf, .field.rg,
-.field.landline, .field.mobile, .field.business,
-.field.number, .field.complement, .field.district, .field.city, .field.zip {
-  max-width: 400px;
-}
