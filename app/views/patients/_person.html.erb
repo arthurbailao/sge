@@ -1,0 +1,51 @@
+<div class="field name">
+  <%= person.label :name, "Nome completo" %>
+  <div class="ui left labeled icon input">
+    <%= person.text_field :name, placeholder:"nome sobrenome" %> 
+    <i class="user icon"></i>
+    <div class="ui corner label"><i class="icon asterisk"></i></div>
+  </div>
+</div>
+<div class="two fields">
+  <div class="field birth">
+    <%= person.label :birth, "Nascimento" %>
+    <div class="ui left labeled icon input">
+      <%= person.text_field :birth, placeholder:"dd/mm/aaaa" %>
+      <i class="date basic icon"></i>
+      <div class="ui corner label"><i class="icon asterisk"></i></div>
+    </div>
+  </div>
+</div>
+<div class="two fields">
+  <div class="field cpf">
+    <%= person.label :cpf, "CPF" %>
+    <%= person.text_field :cpf, placeholder:"cpf" %>
+  </div>
+  <div class="field rg">
+    <%= person.label :rg, "RG" %>
+    <%= person.text_field :rg, placeholder:"rg" %>
+  </div>
+</div>          
+<div class="field">
+  <%= person.label :gender, "Sexo" %>
+  <div class="ui selection dropdown">
+    <%= person.hidden_field :gender %>
+    <div class="default text">sexo</div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item" data-value="male">Masculino</div>
+      <div class="item" data-value="female">Feminino</div>
+    </div>
+  </div>
+</div>
+<h3 class="ui left floated header">Contato</h3>
+<div class="ui clearing divider"></div>
+<%= person.fields_for :contact do |contact| %>
+  <%= render "contact", contact: contact %>
+<% end %>
+
+<h3 class="ui left floated header">Endereço</h3>
+<div class="ui clearing divider"></div>
+<%= person.fields_for :address do |address| %>
+  <%= render "address", address: address %>
+<% end %>

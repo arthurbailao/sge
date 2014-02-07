@@ -1,0 +1,27 @@
+<div class="field email">
+  <%= contact.label :email, "E-mail" %>
+  <div class="ui left icon input">
+    <%= contact.text_field :email, placeholder:"e-mail" %> 
+    <i class="mail icon"></i>
+  </div>
+</div>
+<div class="two fields">
+  <div class="field landline">
+    <%= contact.label :landline, "Telefone residencial" %>
+    <div class="ui left icon input">
+      <%= contact.text_field :landline, placeholder:"telefone residencial" %> 
+      <i class="phone icon"></i>
+    </div>
+  </div>
+  <div class="field mobile">
+    <%= contact.label :mobile, "Celular" %>
+    <div class="ui left icon input">
+      <%= contact.text_field :mobile, placeholder:"celular" %> 
+      <i class="mobile icon"></i>
+    </div>
+  </div>
+</div>
+<div class="field business">
+  <%= contact.label :business, "Telefone comercial" %>
+  <%= contact.text_field :business, placeholder:"telefone comercial" %> 
+</div>

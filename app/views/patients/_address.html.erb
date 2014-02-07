@@ -1,0 +1,39 @@
+<div class="field street">
+  <%= address.label :street, "Logradouro" %>
+  <%= address.text_field :street, placeholder:"rua/avenida" %>
+</div>
+<div class="two fields">
+  <div class="field number">
+    <%= address.label :number, "Número" %>
+    <%= address.text_field :number, placeholder:"número" %>
+  </div>
+  <div class="field complement">
+    <%= address.label :complement, "Complemento" %>
+    <%= address.text_field :complement, placeholder:"complemento" %>
+  </div>
+</div>
+<div class="field district">
+  <%= address.label :district, "Bairro" %>
+  <%= address.text_field :district, placeholder:"bairro" %>
+</div>
+<div class="field city">
+  <%= address.label :city, "Cidade" %>
+  <%= address.text_field :city, placeholder:"cidade" %>
+</div>
+<div class="field state">
+  <%= address.label :state, "Estado" %>
+  <div class="ui selection dropdown state">
+    <%= address.hidden_field :state %>
+    <div class="default text">estado</div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <% states.each do |state| %>
+        <div class="item" data-value="<%= state.last %>"><%= state.first %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="field zip">
+  <%= address.label :zip, "CEP" %>
+  <%= address.text_field :zip, placeholder:"cep" %>
+</div>

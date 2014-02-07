@@ -1,0 +1,19 @@
+<h3 class="ui left floated header">Dados pessoais</h3>
+<div class="ui clearing divider"></div>
+<%= render 'shared/error_messages', object: patient.object %>
+
+<%= patient.fields_for :person do |person| %>
+  <%= render "person", person: person %>
+<% end %>
+
+<%= patient.submit "Salvar", class: "ui blue submit button" %>
+
+<%= javascript_tag do %>
+  <% if patient.object.errors[:"person.cpf"].any? %>
+    $('.field.cpf').addClass('error');
+  <% end %>
+  <% if patient.object.errors[:"person.rg"].any? %>
+    $('.field.rg').addClass('error');
+  <% end %>
+<% end %>
+
